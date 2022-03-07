@@ -1,4 +1,5 @@
 var createError = require("http-errors");
+const fs = require("fs");
 var express = require("express");
 var path = require("path");
 require("dotenv").config();
@@ -28,6 +29,13 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+
+app.get("/createfile", (req, res, fs) => {
+  fs.writeFile("test", () => {
+    console.log("file created");
+  });
+  return res.json({});
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
